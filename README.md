@@ -2,7 +2,7 @@
 
 An open case format for turning fragmented signals into **sourced, challenged, market-relevant intelligence**.
 
-Vigil's intelligence network is built to help people understand an event sooner, test the evidence behind it, and see what it could change. This repository will make the *case format* inspectable and useful to other builders without publishing Vigil's live product or proprietary intelligence engine.
+Vigil turns scattered reporting and evidence into a clearer picture of what happened and what may matter next. This repository focuses on a reusable case format for researchers and developers to record claims, trace sources, challenge interpretations, and map potential market exposure.
 
 ## What a case should answer
 
@@ -20,6 +20,4 @@ Consider a reported tanker diversion near a strategic shipping route. A useful c
 - A validator for case structure and evidence references.
 - A small set of clearly labelled historical examples.
 
-This is the first Vigil-specific commit, not a released schema, CLI, benchmark, live feed, or API. Historical examples will be labelled as reference studies unless they are backed by genuine Vigil detection receipts.
-
-The production website, ingestion infrastructure, ranking and admission logic, classifier prompts, private intelligence, Marketplace operations, credentials, and deployment tooling remain outside this repository.
+**Status:** This repository currently contains the project outline. The schema, validator, and examples have not been published yet. Historical reference studies will be labelled separately from cases backed by genuine Vigil detection receipts.
