@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "baltimore-bridge-2024",
+  "title": "Dali contact and the Francis Scott Key Bridge collapse",
+  "caseType": "historical_reference",
+  "status": "closed",
+  "event": {
+    "kind": "transport-infrastructure-disruption",
+    "occurredAt": "2024-03-26T05:29:00Z",
+    "location": "Baltimore, Maryland, United States",
+    "summary": "The containership Dali struck the Francis Scott Key Bridge; a substantial portion collapsed."
+  },
+  "sources": [
+    {
+      "id": "ntsb-investigation",
+      "publisher": "US National Transportation Safety Board",
+      "url": "https://www.ntsb.gov/investigations/Pages/DCA24MM031.aspx",
+      "retrievedAt": "2026-09-25T20:25:22Z",
+      "independenceGroup": "ntsb"
+    }
+  ],
+  "claims": [
+    {
+      "id": "vessel-contact",
+      "text": "The Dali lost electrical power, propulsion and steering while outbound and struck the bridge support pier.",
+      "status": "reported",
+      "confidence": "medium",
+      "evidence": [
+        { "sourceId": "ntsb-investigation", "locator": "What Happened, opening paragraph", "relation": "supports" }
+      ]
+    },
+    {
+      "id": "bridge-collapse",
+      "text": "A substantial portion of the bridge collapsed following the contact.",
+      "status": "reported",
+      "confidence": "medium",
+      "evidence": [
+        { "sourceId": "ntsb-investigation", "locator": "What Happened, opening paragraph", "relation": "supports" }
+      ]
+    }
+  ],
+  "challenge": {
+    "hypotheses": [
+      {
+        "id": "control-loss-preceded-contact",
+        "statement": "Shipboard power and control losses preceded the bridge contact in the NTSB sequence.",
+        "claimIds": ["vessel-contact"],
+        "falsifiers": ["A revised official event sequence placing the power and control losses after the contact."]
+      },
+      {
+        "id": "port-route-disruption",
+        "statement": "Bridge debris could constrain local maritime passage until the channel was cleared.",
+        "claimIds": ["bridge-collapse"],
+        "falsifiers": ["Contemporaneous port passage records showing the relevant channel remained fully open."],
+        "alternativeTo": ["alternate-channel-access"]
+      },
+      {
+        "id": "alternate-channel-access",
+        "statement": "Some terminals might have remained reachable through alternate channels despite the bridge debris.",
+        "claimIds": ["bridge-collapse"],
+        "falsifiers": ["Port authority notices showing that no alternate channel served those terminals at the event time."],
+        "alternativeTo": ["port-route-disruption"]
+      }
+    ],
+    "unresolvedQuestions": [
+      "At the event time, which vessel classes and terminals could still be served through alternate channels?",
+      "How long did each route restriction last?"
+    ]
+  },
+  "exposures": [
+    {
+      "id": "baltimore-maritime-route",
+      "claimId": "bridge-collapse",
+      "targetType": "route",
+      "target": "Port of Baltimore maritime access",
+      "channel": "Physical channel access and vessel scheduling",
+      "conditionalImpact": "If bridge debris blocked the relevant channel, vessels serving affected terminals would face delays or rerouting; the bridge-collapse claim alone does not measure the duration or economic size.",
+      "watchFor": ["Port authority channel notices", "Vessel passage records", "Terminal reopening updates"]
+    }
+  ],
+  "assessment": {
+    "asOf": "2026-09-25T20:25:22Z",
+    "whatHappened": "The NTSB investigation describes shipboard power and control losses, contact with a support pier, and the subsequent bridge collapse on March 26, 2024.",
+    "whyItMatters": "A physical transport disruption can propagate from a single infrastructure failure to port access and shipment timing. This case demonstrates an exposure chain, not a measured trade or current alert.",
+    "whatToWatch": ["Official navigation-channel status at the time", "Vessel and terminal activity around the interruption"]
+  },
+  "provenance": {
+    "maintainer": "Vigil Open Intelligence contributors",
+    "updatedAt": "2026-09-25T20:25:22Z"
+  }
+}

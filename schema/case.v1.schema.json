@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/muhammedkaraarslan/project/blob/main/schema/case.v1.schema.json",
+  "title": "Vigil intelligence case v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "id", "title", "caseType", "status", "event", "sources", "claims", "challenge", "exposures", "assessment", "provenance"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "id": { "$ref": "#/$defs/id" },
+    "title": { "$ref": "#/$defs/text" },
+    "caseType": { "enum": ["historical_reference", "vigil_detection"] },
+    "status": { "enum": ["open", "updated", "closed"] },
+    "event": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "occurredAt", "location", "summary"],
+      "properties": {
+        "kind": { "$ref": "#/$defs/text" },
+        "occurredAt": { "$ref": "#/$defs/time" },
+        "location": { "$ref": "#/$defs/text" },
+        "summary": { "$ref": "#/$defs/text" }
+      }
+    },
+    "sources": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "publisher", "url", "retrievedAt"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "publisher": { "$ref": "#/$defs/text" },
+          "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+          "publishedAt": { "$ref": "#/$defs/time" },
+          "retrievedAt": { "$ref": "#/$defs/time" },
+          "independenceGroup": { "$ref": "#/$defs/id" }
+        }
+      }
+    },
+    "claims": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "text", "status", "confidence", "evidence"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "text": { "$ref": "#/$defs/text" },
+          "status": { "enum": ["reported", "corroborated", "contested"] },
+          "confidence": { "enum": ["low", "medium", "high"] },
+          "evidence": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/evidence" } }
+        }
+      }
+    },
+    "challenge": {
+      "type": "object", "additionalProperties": false,
+      "required": ["hypotheses", "unresolvedQuestions"],
+      "properties": {
+        "hypotheses": {
+          "type": "array", "minItems": 1,
+          "items": {
+            "type": "object", "additionalProperties": false,
+            "required": ["id", "statement", "claimIds", "falsifiers"],
+            "properties": {
+              "id": { "$ref": "#/$defs/id" },
+              "statement": { "$ref": "#/$defs/text" },
+              "claimIds": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } },
+              "falsifiers": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/text" } },
+              "alternativeTo": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } }
+            }
+          }
+        },
+        "unresolvedQuestions": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/text" } }
+      }
+    },
+    "exposures": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "claimId", "targetType", "target", "channel", "conditionalImpact", "watchFor"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "claimId": { "$ref": "#/$defs/id" },
+          "targetType": { "enum": ["company", "commodity", "route", "market", "sector"] },
+          "target": { "$ref": "#/$defs/text" },
+          "channel": { "$ref": "#/$defs/text" },
+          "conditionalImpact": { "$ref": "#/$defs/text" },
+          "watchFor": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/text" } }
+        }
+      }
+    },
+    "assessment": {
+      "type": "object", "additionalProperties": false,
+      "required": ["asOf", "whatHappened", "whyItMatters", "whatToWatch"],
+      "properties": {
+        "asOf": { "$ref": "#/$defs/time" },
+        "whatHappened": { "$ref": "#/$defs/text" },
+        "whyItMatters": { "$ref": "#/$defs/text" },
+        "whatToWatch": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/text" } }
+      }
+    },
+    "provenance": {
+      "type": "object", "additionalProperties": false,
+      "required": ["maintainer", "updatedAt"],
+      "properties": {
+        "maintainer": { "$ref": "#/$defs/text" },
+        "updatedAt": { "$ref": "#/$defs/time" },
+        "detectionReceipt": {
+          "type": "object", "additionalProperties": false,
+          "required": ["runId", "recordedAt", "url"],
+          "properties": {
+            "runId": { "$ref": "#/$defs/id" },
+            "recordedAt": { "$ref": "#/$defs/time" },
+            "url": { "type": "string", "format": "uri", "pattern": "^https://" }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$", "maxLength": 100 },
+    "text": { "type": "string", "minLength": 1 },
+    "time": { "type": "string", "format": "date-time" },
+    "evidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["sourceId", "locator", "relation"],
+      "properties": {
+        "sourceId": { "$ref": "#/$defs/id" },
+        "locator": { "$ref": "#/$defs/text" },
+        "relation": { "enum": ["supports", "contradicts"] }
+      }
+    }
+  }
+}

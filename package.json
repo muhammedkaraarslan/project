@@ -1,0 +1,19 @@
+{
+  "name": "@vigil-network/open-intelligence",
+  "version": "0.1.0",
+  "description": "A case format and CLI for sourced, challenged, market-relevant intelligence",
+  "type": "module",
+  "types": "./src/index.d.ts",
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "bin": { "vigil": "./src/cli.js" },
+  "exports": {
+    ".": { "types": "./src/index.d.ts", "default": "./src/index.js" },
+    "./schema": "./schema/case.v1.schema.json"
+  },
+  "files": ["src", "schema", "LICENSE"],
+  "scripts": {
+    "test": "node --test",
+    "check:examples": "node src/cli.js validate examples/*.json"
+  }
+}

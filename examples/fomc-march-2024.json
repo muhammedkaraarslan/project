@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "fomc-march-2024",
+  "title": "March 2024 FOMC target range held",
+  "caseType": "historical_reference",
+  "status": "closed",
+  "event": {
+    "kind": "monetary-policy-announcement",
+    "occurredAt": "2024-03-20T18:00:00Z",
+    "location": "Washington, DC, United States",
+    "summary": "The Federal Reserve maintained its federal funds target range at 5.25–5.50 percent."
+  },
+  "sources": [
+    {
+      "id": "fed-statement",
+      "publisher": "Board of Governors of the Federal Reserve System",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20240320a.htm",
+      "publishedAt": "2024-03-20T18:00:00Z",
+      "retrievedAt": "2026-09-25T20:25:23Z",
+      "independenceGroup": "federal-reserve"
+    }
+  ],
+  "claims": [
+    {
+      "id": "target-range-held",
+      "text": "The FOMC maintained the target range for the federal funds rate at 5.25–5.50 percent.",
+      "status": "reported",
+      "confidence": "medium",
+      "evidence": [
+        { "sourceId": "fed-statement", "locator": "FOMC statement, paragraph beginning 'In support of its goals'", "relation": "supports" }
+      ]
+    },
+    {
+      "id": "inflation-condition",
+      "text": "The FOMC said it did not expect a reduction to be appropriate until it gained greater confidence that inflation was moving sustainably toward 2 percent.",
+      "status": "reported",
+      "confidence": "medium",
+      "evidence": [
+        { "sourceId": "fed-statement", "locator": "FOMC statement, sentence after the target-range decision", "relation": "supports" }
+      ]
+    }
+  ],
+  "challenge": {
+    "hypotheses": [
+      {
+        "id": "policy-patience",
+        "statement": "The statement signaled that near-term easing depended on further inflation evidence.",
+        "claimIds": ["inflation-condition"],
+        "falsifiers": ["A contemporaneous official clarification removing the stated inflation-confidence condition."]
+      }
+    ],
+    "unresolvedQuestions": [
+      "How did subsequent inflation releases change the committee's confidence?",
+      "Which part of the decision was already priced by the market before release?"
+    ]
+  },
+  "exposures": [
+    {
+      "id": "short-rates",
+      "claimId": "inflation-condition",
+      "targetType": "market",
+      "target": "Short-duration US interest-rate expectations",
+      "channel": "Expected timing of future policy-rate reductions",
+      "conditionalImpact": "If incoming inflation evidence remained insufficient, expectations of imminent cuts could be revised; the statement alone does not establish the direction or magnitude of a market move.",
+      "watchFor": ["Subsequent inflation releases", "Later FOMC statements", "Contemporaneous market-implied rate path"]
+    }
+  ],
+  "assessment": {
+    "asOf": "2026-09-25T20:25:23Z",
+    "whatHappened": "The March 20, 2024 FOMC statement maintained the federal funds target range at 5.25–5.50 percent and tied any reduction to greater confidence in inflation's path.",
+    "whyItMatters": "A policy announcement can change the expected timing of future rates. The exposure here is conditional and cannot be turned into a retrospective trading claim without contemporaneous pricing evidence.",
+    "whatToWatch": ["Inflation data after the meeting", "Subsequent committee communications", "Market-implied path around the release"]
+  },
+  "provenance": {
+    "maintainer": "Vigil Open Intelligence contributors",
+    "updatedAt": "2026-09-25T20:25:23Z"
+  }
+}
