@@ -35,7 +35,7 @@ test('corroboration cannot count one publisher twice', async () => {
 test('historical study cannot masquerade as a Vigil detection', async () => {
   const item = await example('fomc-march-2024');
   item.caseType = 'vigil_detection';
-  assert.match(validateCase(item).errors.map((error) => error.message).join(' '), /receipt/);
+  assert.ok(validateCase(item).errors.some((error) => error.path === '$.provenance.detectionReceipt'));
   item.provenance.detectionReceipt = { runId: 'test-run', recordedAt: item.assessment.asOf, url: 'https://example.org/receipt' };
   assert.equal(validateCase(item).valid, true);
   item.caseType = 'historical_reference';
